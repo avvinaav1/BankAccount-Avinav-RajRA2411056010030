@@ -6,13 +6,7 @@ from StatementGenerator import StatementGenerator
 
 def main():
 
-    account = BankAccount(
-        101,
-        "Ravi",
-        17,
-        500,
-        "Savings"
-    )
+    account = BankAccount(101, "Ravi", 500)
 
     account_repository = AccountRepository()
     notification_service = NotificationService()
@@ -25,7 +19,7 @@ def main():
         )
         account_repository.save(account)
 
-    if account.withdraw(500, None):
+    if account.withdraw(500):
         notification_service.send(
             "Withdrawal completed for account "
             + str(account.get_account_number())
