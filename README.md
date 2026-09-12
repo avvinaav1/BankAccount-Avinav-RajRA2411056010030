@@ -9,3 +9,5 @@ For the Salary Account requirement, the only existing file opened and edited was
 ## Section 3 — Liskov Substitution Principle
 
 The Square/Rectangle example breaks LSP because code using a Rectangle reasonably assumes that setting width and height are independent operations. Square violates that substitution rule by changing both dimensions from either setter, so a Square stored as a Rectangle produces 400 instead of the expected 200.
+
+Making FixedDepositAccount implement Withdrawable and throw an exception is the wrong fix even though it compiles, because callers use Withdrawable under the substitution rule that every implementation must honor the withdrawal contract. A Fixed Deposit cannot honestly fulfill that contract, so it must not be substitutable for Withdrawable. SavingsAccount and CurrentAccount alone implement Withdrawable, and the withdrawal loop iterates over that narrower capability. No class in the final code overrides a method just to report an unsupported operation.
