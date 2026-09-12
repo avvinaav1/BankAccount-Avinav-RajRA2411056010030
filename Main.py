@@ -1,4 +1,7 @@
+from AccountRepository import AccountRepository
 from BankAccount import BankAccount
+from NotificationService import NotificationService
+from StatementGenerator import StatementGenerator
 
 
 def main():
@@ -7,28 +10,29 @@ def main():
         101,
         "Ravi",
         17,
-        200,
+        500,
         "Savings"
     )
 
-    # Age corrected to 18
-    # Balance corrected to 500
+    account_repository = AccountRepository()
+    notification_service = NotificationService()
+    statement_generator = StatementGenerator()
 
-    account.set_pin(1234)
+    if account.deposit(1000):
+        notification_service.send(
+            "Deposit completed for account "
+            + str(account.get_account_number())
+        )
+        account_repository.save(account)
 
-    account.deposit(1000)
+    if account.withdraw(500, None):
+        notification_service.send(
+            "Withdrawal completed for account "
+            + str(account.get_account_number())
+        )
+        account_repository.save(account)
 
-    account.withdraw(500, 1234)
-
-    # Wrong PIN, should fail
-    account.withdraw(500, 9999)
-
-    account.print_statement()
-
-    print(
-        "Interest earned: Rs. "
-        + str(account.calculate_interest())
-    )
+    print(statement_generator.generate(account))
 
 
 if __name__ == "__main__":
