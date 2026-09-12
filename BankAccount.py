@@ -140,26 +140,6 @@ class BankAccount:
             return 0.0
 
     # ----------------------------------------------------
-    # Statement generation
-    # ----------------------------------------------------
-
-    def print_statement(self):
-
-        print(
-            f"---- Statement for Account #{self.account_number} "
-            f"({self.name}) ----"
-        )
-
-        for entry in self.transaction_log:
-            print(entry)
-
-        print(f"Current Balance: Rs. {self.balance}")
-
-        print(
-            "-----------------------------------------------------"
-        )
-
-    # ----------------------------------------------------
     # Getters
     # ----------------------------------------------------
 
@@ -183,3 +163,6 @@ class BankAccount:
 
     def has_pin(self):
         return self.pin is not None
+
+    def get_transaction_log(self):
+        return list(self.transaction_log)
