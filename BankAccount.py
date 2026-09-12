@@ -43,7 +43,7 @@ class BankAccount:
         self.transaction_log = []
 
     # ----------------------------------------------------
-    # Account operations, tangled with logging + notification
+    # Account operations
     # ----------------------------------------------------
 
     def deposit(self, amount):
@@ -58,20 +58,9 @@ class BankAccount:
 
         self.balance += amount
 
-        # Logging responsibility
         self.transaction_log.append(
             f"DEPOSIT: Rs. {amount} | New balance: {self.balance}"
         )
-
-        # Notification responsibility
-        self.send_email(
-            self.name,
-            f"Your deposit of Rs. {amount} was successful. "
-            f"New balance: {self.balance}"
-        )
-
-        # Persistence responsibility
-        self.save_to_database()
 
         return True
 
@@ -105,14 +94,6 @@ class BankAccount:
             f"WITHDRAW: Rs. {amount} | New balance: {self.balance}"
         )
 
-        self.send_email(
-            self.name,
-            f"Your withdrawal of Rs. {amount} was successful. "
-            f"New balance: {self.balance}"
-        )
-
-        self.save_to_database()
-
         return True
 
     def close_account(self):
@@ -121,14 +102,6 @@ class BankAccount:
             return False
 
         self.status = "Inactive"
-
-        self.send_email(
-            self.name,
-            "Your account has been closed."
-        )
-
-        self.save_to_database()
-
         return True
 
     def reopen_account(self):
@@ -137,14 +110,6 @@ class BankAccount:
             return False
 
         self.status = "Active"
-
-        self.send_email(
-            self.name,
-            "Your account has been reopened."
-        )
-
-        self.save_to_database()
-
         return True
 
     def set_pin(self, new_pin):
@@ -173,28 +138,6 @@ class BankAccount:
 
         else:
             return 0.0
-
-    # ----------------------------------------------------
-    # Persistence
-    # ----------------------------------------------------
-
-    def save_to_database(self):
-
-        # Pretend this talks to MySQL
-        print(
-            f"[DB] Saving account {self.account_number} to MySQL..."
-        )
-
-    # ----------------------------------------------------
-    # Notification
-    # ----------------------------------------------------
-
-    def send_email(self, recipient, message):
-
-        # Pretend this talks to an SMTP server
-        print(
-            f"[EMAIL] To: {recipient} | {message}"
-        )
 
     # ----------------------------------------------------
     # Statement generation
