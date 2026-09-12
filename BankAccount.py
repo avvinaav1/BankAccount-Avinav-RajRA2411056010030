@@ -28,16 +28,6 @@ class BankAccount:
         )
         return True
 
-    def withdraw(self, amount):
-        if amount <= 0 or amount > self.balance:
-            return False
-
-        self.balance -= amount
-        self.transaction_log.append(
-            f"WITHDRAW: Rs. {amount} | New balance: {self.balance}"
-        )
-        return True
-
     def get_account_number(self):
         return self.account_number
 

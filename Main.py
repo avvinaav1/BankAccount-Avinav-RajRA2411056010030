@@ -1,19 +1,19 @@
 from AccountRepository import AccountRepository
 from Bank import Bank
 from NotificationService import NotificationService
-from SalaryAccount import SalaryAccount
-from SalaryInterestPolicy import SalaryInterestPolicy
+from SavingsAccount import SavingsAccount
+from SavingsInterestPolicy import SavingsInterestPolicy
 from StatementGenerator import StatementGenerator
 
 
 def main(notification_service):
 
     bank = Bank(notification_service)
-    account = SalaryAccount(101, "Ravi", 500)
+    account = SavingsAccount(101, "Ravi", 500)
 
     account_repository = AccountRepository()
     statement_generator = StatementGenerator()
-    interest_policy = SalaryInterestPolicy()
+    interest_policy = SavingsInterestPolicy()
 
     if bank.deposit(account, 1000):
         account_repository.save(account)
