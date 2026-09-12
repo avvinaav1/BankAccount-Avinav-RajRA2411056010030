@@ -1,31 +1,24 @@
 from AccountRepository import AccountRepository
-from BankAccount import BankAccount
+from Bank import Bank
 from NotificationService import NotificationService
-from SavingsInterestPolicy import SavingsInterestPolicy
+from SalaryAccount import SalaryAccount
+from SalaryInterestPolicy import SalaryInterestPolicy
 from StatementGenerator import StatementGenerator
 
 
-def main():
+def main(notification_service):
 
-    account = BankAccount(101, "Ravi", 500)
+    bank = Bank(notification_service)
+    account = SalaryAccount(101, "Ravi", 500)
 
     account_repository = AccountRepository()
-    notification_service = NotificationService()
     statement_generator = StatementGenerator()
-    interest_policy = SavingsInterestPolicy()
+    interest_policy = SalaryInterestPolicy()
 
-    if account.deposit(1000):
-        notification_service.send(
-            "Deposit completed for account "
-            + str(account.get_account_number())
-        )
+    if bank.deposit(account, 1000):
         account_repository.save(account)
 
-    if account.withdraw(500):
-        notification_service.send(
-            "Withdrawal completed for account "
-            + str(account.get_account_number())
-        )
+    if bank.withdraw(account, 500):
         account_repository.save(account)
 
     print(statement_generator.generate(account))
@@ -36,4 +29,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(NotificationService())
