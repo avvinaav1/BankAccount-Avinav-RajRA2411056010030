@@ -1,3 +1,15 @@
+# Reasons the original class may need to change:
+# 1. Account-operation rules change (deposit, withdrawal, or balance rules).
+# 2. Customer and account validation rules change.
+# 3. PIN or account-status security rules change.
+# 4. Interest-rate policy changes.
+# 5. The database or persistence mechanism changes.
+# 6. The email provider or notification format changes.
+# 7. The statement or transaction-log format changes.
+#
+# BankAccount job description: Manage deposits, withdrawals, and the account balance, and expose simple account data.
+
+
 class BankAccount:
 
     def __init__(self, account_number, name, age, balance, account_type):
