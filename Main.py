@@ -1,7 +1,7 @@
 from AccountRepository import AccountRepository
 from Bank import Bank
 from ConsoleNotificationService import ConsoleNotificationService
-from InMemoryAccountRepository import InMemoryAccountRepository
+from FileAccountRepository import FileAccountRepository
 from SavingsAccount import SavingsAccount
 from SavingsInterestPolicy import SavingsInterestPolicy
 from StatementGenerator import StatementGenerator
@@ -28,5 +28,5 @@ def main(notification_service, account_repository: AccountRepository):
 if __name__ == "__main__":
     main(
         ConsoleNotificationService(),
-        InMemoryAccountRepository(),
+        FileAccountRepository("accounts.txt"),
     )
